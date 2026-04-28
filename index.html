@@ -1,63 +1,255 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio Pessoal - Vinícius Eduardo Teixeira</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Vinícius Eduardo Teixeira - Portfólio</title>
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #000000;
+      color: rgb(255, 255, 255);
+      text-align: center;
+      transition: background-color 1s ease-in-out, color 1s ease-in-out;
+      animation: fadeIn 2s ease-in-out;
+    }   
+    
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    h1, h2, p { animation: slideUp 1.5s ease-out; }
+    @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    
+    .retangulo {
+      border: 2px solid #088bf7;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px auto;
+      max-width: 700px;
+      background-color: rgba(255,255,255,0.05);
+    }
+
+    .projeto-item img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 10px;
+      margin: 20px auto;
+      display: block;
+      border: 1px solid #088bf7;
+    }
+
+    .imagem-circular {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #088bf7;
+      margin: 20px auto;
+      display: block;
+    }  
+    
+    .top-bar {
+      background-color: #0604a7;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .top-bar h1 {
+      background-color: rgb(3, 2, 73);
+      color: #088bf7;
+      padding: 5px 15px;
+      border-radius: 5px;
+      margin: 0;
+      font-size: 1.4rem;
+    }
+    
+    .menu-icon {
+      display: flex;
+      align-items: center;
+      gap: 15px; 
+    }
+    
+    .menu-icon img { cursor: pointer; }
+    
+    nav ul {
+      list-style: none;
+      display: none;
+      flex-direction: column;
+      background-color: #333;
+      position: absolute;
+      right: 0;
+      top: 60px;
+      margin: 0;
+      padding: 0;
+      border-radius: 5px;
+      width: 200px;
+    }
+    nav ul li { border-bottom: 1px solid #444; }
+    nav ul li a { color: #fff; text-decoration: none; display: block; padding: 12px; }
+    nav ul li a:hover { background-color: #444; }
+    
+    section { padding: 4rem 2rem 2rem; }
+    .projeto-container { position: relative; max-width: 800px; margin: auto; }
+    .projeto-item { display: none; }
+    .projeto-item.active { display: block; }
+    
+    .setas img {
+      cursor: pointer;
+      margin: 10px 20px;
+      filter: brightness(0) invert(1);
+    }
+    
+    .btn-github {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #088bf7;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: #050366;
+      color: #f5f5f5;
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .dark-mode { background-color: #f4f4f4; color: #222; }
+  </style>
 </head>
 <body>
-
+  <div class="top-bar">
+    <h1>Vinícius Eduardo Teixeira</h1>
     <nav>
-        <ul>
-            <li><a href="#sobre">Sobre mim</a></li>
-            <li><a href="#formacao">Formação</a></li>
-            <li><a href="#portfolio">Portfólio</a></li>
-            <li><a href="#contato">Contato</a></li>
-        </ul>
+      <div class="menu-icon">
+        <img width="40" height="40" src="https://img.icons8.com/ios/50/menu--v7.png" alt="menu" onclick="toggleMenu()"/>
+        <img id="theme-icon" width="40" height="40" src="https://img.icons8.com/ios/50/sun--v1.png" alt="dark-mode" onclick="toggleDarkMode()"/>
+      </div>
+      <ul id="menu-list">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#sobre">Sobre Mim</a></li>
+        <li><a href="#formacao">Formação</a></li>
+        <li><a href="#projeto">Projetos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
     </nav>
+  </div>
+   
+  <br><br><br><br>
 
-    <main>
-        <section id="sobre">
-            <h2>Sobre Mim</h2>
-            <p>Olá, meu nome é <strong>Vinícius Eduardo Teixeira</strong>. Sou estudante de Ciência da Computação na Uninter.</p>
-            <p>No meu tempo livre, gosto de jogar jogos. Sou apaixonado por tecnologia e estou expandindo meus conhecimentos em programação para me tornar um desenvolvedor web.</p>
-        </section>
+  <img src="./img/fotoperfil.jpeg" alt="Foto de Perfil Vinícius" class="imagem-circular">
 
-        <section id="formacao">
-            <h2>Formação</h2>
-            <p><strong>Curso:</strong> Ciência da Computação - Centro Universitário Internacional UNINTER.</p>
-            <p><strong>Idiomas:</strong> Português (Nativo).</p>
-            <p><strong>Educação mais recente:</strong> Ensino Médio Completo.</p>
-        </section>
+  <section id="home">
+    <h2>Home</h2>
+    <div class="retangulo">
+      <p><strong>Olá, meu nome é Vinícius Eduardo Teixeira</strong></p>
+      <p>Bem-vindo ao meu portfólio acadêmico. Aqui apresento meus conhecimentos em Ciência da Computação e meus projetos em desenvolvimento.</p>
+    </div>
+  </section>
+  
+  <section id="sobre">
+    <h2>Sobre Mim</h2>
+    <div class="retangulo">
+      <p>Sou estudante de Ciência da Computação, apaixonado por tecnologia, games e programação. Gosto de explorar novas linguagens e entender como os sistemas funcionam.</p>
+    </div>
+  </section>
 
-        <section id="portfolio">
-            <h2>Portfólio</h2>
-            <p>Confira meus projetos e códigos-fonte no meu repositório oficial:</p>
-            <a href="https://github.com/viniciusteixeira2005/portfolio-uninter" target="_blank">Acessar meu GitHub</a>
-        </section>
+  <section id="formacao">
+    <h2>Formação</h2>
+    <div class="retangulo">
+      <p><strong>Curso:</strong> Ciência da Computação</p>
+      <p><strong>Instituição:</strong> Centro Universitário Internacional (UNINTER)</p>
+      <p><strong>RU:</strong> 5167526</p>
+    </div>
+  </section>
+  
+  <section id="projeto">
+    <h2>Meus Projetos</h2>
+    <div class="setas">
+      <img width="50" height="50" src="https://img.icons8.com/ios/50/long-arrow-left.png" alt="Anterior" onclick="mudarProjeto(-1)"/>
+      <img width="50" height="50" src="https://img.icons8.com/ios/50/long-arrow-right--v1.png" alt="Próximo" onclick="mudarProjeto(1)"/>
+    </div>
+    
+    <div class="projeto-container">
+      <div class="projeto-item active">
+        <img src="./img/foto1.jpg" alt="Projeto 1"/>
+        <p>Desenvolvimento de scripts em Python focados em automação e lógica de dados.</p>
+        <a href="https://github.com/viniciusteixeira2005/portfolio-uninter" target="_blank" class="btn-github">Ver no GitHub</a>
+      </div>
+      <div class="projeto-item">
+        <img src="./img/foto2.jpg" alt="Projeto 2"/>
+        <p>Criação de interfaces responsivas utilizando as melhores práticas de HTML5 e CSS3.</p>
+        <a href="https://github.com/viniciusteixeira2005/portfolio-uninter" target="_blank" class="btn-github">Ver no GitHub</a>
+      </div>
+    </div>
+  </section>
+    
+  <section id="contato">
+    <h2>Contato</h2>
+    <div class="retangulo">
+      <form onsubmit="enviarMensagem(); return false;">
+        <label>Nome Completo:</label><br>
+        <input type="text" id="nome" placeholder="Seu nome" required style="width: 80%; padding: 8px; margin: 5px;"/><br><br>
+        <label>E-mail:</label><br>
+        <input type="email" id="email" placeholder="Seu e-mail" required style="width: 80%; padding: 8px; margin: 5px;"/><br><br>
+        <label>Mensagem:</label><br>
+        <textarea rows="5" id="mensagem" placeholder="Digite sua mensagem" required style="width: 80%; padding: 8px; margin: 5px;"></textarea><br><br>
+        <input type="submit" value="Enviar E-mail" style="padding: 10px 20px; cursor: pointer;"/>
+      </form>
+    </div>
+  </section>
+ 
+  <footer>
+    <p>&copy; 2026 - Vinícius Eduardo Teixeira - RU: 5167526 - Uninter</p>
+  </footer>
+ 
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu-list");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
 
-        <section id="contato">
-            <h2>Contato</h2>
-            <form id="meuFormulario">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
-                
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" placeholder="usuario@dominio.com" required>
-                
-                <label for="mensagem">Mensagem:</label>
-                <textarea id="mensagem" name="mensagem" placeholder="Como posso te ajudar?" required></textarea>
-                
-                <button type="submit">Enviar Mensagem</button>
-            </form>
-        </section>
-    </main>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const icon = document.getElementById("theme-icon");
+      if (document.body.classList.contains("dark-mode")) {
+        icon.src = "https://img.icons8.com/ios/50/moon-symbol.png";
+      } else {
+        icon.src = "https://img.icons8.com/ios/50/sun--v1.png";
+      }
+    }
 
-    <footer>
-        <p>&copy; 2024 - Desenvolvido por Vinícius Eduardo Teixeira - RU: 5167526</p>
-    </footer>
-
-    <script src="script.js"></script>
+    let projetoIndex = 0;
+    
+    function mudarProjeto(direcao) {
+      const projetos = document.querySelectorAll(".projeto-item");
+      projetos[projetoIndex].classList.remove("active");
+      projetoIndex = (projetoIndex + direcao + projetos.length) % projetos.length;
+      projetos[projetoIndex].classList.add("active");
+    }
+    
+    function enviarMensagem() {
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const mensagem = document.getElementById('mensagem').value.trim();
+      
+      const assunto = "Contato Portfólio - Vinícius";
+      const corpo = `Nome: ${nome}%0AEmail: ${email}%0AMensagem: ${mensagem}`;
+      window.location.href = `mailto:viniciuseduardoteixeira67@gmail.com?subject=${assunto}&body=${corpo}`;
+      alert("Abrindo seu aplicativo de e-mail!");
+    }
+  </script>
 </body>
 </html>

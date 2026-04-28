@@ -1,47 +1,66 @@
 /**
- * ATIVIDADE PRÁTICA - FUNDAMENTOS DA PROGRAMAÇÃO WEB
- * Objetivo: Validação de formulário e simulação de envio
+ * SCRIPT DE INTERAÇÃO - PORTFÓLIO ACADÊMICO
+ * Aluno: Vinícius Eduardo Teixeira
+ * RU: 5167526
  */
 
-// Aguarda o DOM (estrutura do HTML) carregar totalmente antes de executar o script
-document.addEventListener('DOMContentLoaded', function() {
+// 1. Função do Menu: Abre e fecha a lista ao clicar no ícone
+function toggleMenu() {
+    const menu = document.getElementById("menu-list");
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+}
+
+// 2. Função de Modo Escuro: Alterna as cores e troca o ícone
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+    const icon = document.getElementById("theme-icon");
     
-    // Seleciona o formulário pelo ID definido no HTML [cite: 59]
-    const form = document.getElementById('meuFormulario');
+    if (document.body.classList.contains("dark-mode")) {
+        icon.src = "https://img.icons8.com/ios/50/moon-symbol.png";
+    } else {
+        icon.src = "https://img.icons8.com/ios/50/sun--v1.png";
+    }
+}
 
-    // Escuta o evento de "submit" (quando o usuário clica no botão enviar)
-    form.addEventListener('submit', function(event) {
-        
-        // Impede o comportamento padrão de recarregar a página [cite: 61]
-        event.preventDefault();
+// 3. Controle do Carrossel de Projetos
+let projetoIndex = 0;
 
-        // Captura os valores dos inputs e remove espaços em branco extras com .trim()
-        const nome = document.getElementById('nome').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const mensagem = document.getElementById('mensagem').value.trim();
+function mudarProjeto(direcao) {
+    const projetos = document.querySelectorAll(".projeto-item");
+    
+    // Se não encontrar projetos, sai da função para não dar erro
+    if (projetos.length === 0) return;
 
-        // --- VALIDAÇÃO OBRIGATÓRIA (Requisito seção 5 do roteiro) --- [cite: 59]
-        
-        // Verifica se todos os campos estão preenchidos
-        if (nome === "" || email === "" || mensagem === "") {
-            alert("Erro: Todos os campos (nome, e-mail e mensagem) devem ser preenchidos.");
-            return; // Interrompe a execução se houver erro
-        }
+    // Esconde o projeto atual
+    projetos[projetoIndex].classList.remove("active");
+    
+    // Calcula o próximo índice (vai e volta em loop)
+    projetoIndex = (projetoIndex + direcao + projetos.length) % projetos.length;
+    
+    // Mostra o novo projeto selecionado
+    projetos[projetoIndex].classList.add("active");
+}
 
-        // Validação de formato de e-mail (Requisito: usuario@dominio.com) 
-        // O regex abaixo verifica se existe texto antes do @, depois do @ e um ponto (.)
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert("Erro: Por favor, informe um e-mail em formato válido (exemplo: usuario@dominio.com).");
-            return;
-        }
-
-        // --- SIMULAÇÃO DE ENVIO (Requisito seção 5 do roteiro) --- [cite: 61]
-        
-        // Exibe mensagem de confirmação através de um alerta
-        alert("Mensagem enviada com sucesso! Em breve entraremos em contato, " + nome + ".");
-        
-        // Limpa os campos do formulário após o sucesso [cite: 61]
-        form.reset();
-    });
-});
+// 4. Função para Envio de E-mail via Formulário
+function enviarMensagem() {
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const mensagem = document.getElementById('mensagem').value.trim();
+    
+    if (!nome || !email || !mensagem) {
+        alert("Por favor, preencha todos os campos antes de enviar.");
+        return;
+    }
+    
+    const assunto = "Contato pelo Portfólio - Vinícius Teixeira";
+    const corpo = `Olá, meu nome é ${nome}.%0A%0A${mensagem}%0A%0AMeu e-mail para retorno: ${email}`;
+    
+    // Atualizado com o seu e-mail do Gmail
+    window.location.href = `mailto:viniciuseduardoteixeira67@gmail.com?subject=${assunto}&body=${corpo}`;
+    
+    alert("Mensagem preparada! Verifique seu aplicativo de e-mail.");
+}
